@@ -1,0 +1,16 @@
+doctype html
+html(ng-app="note")
+  head
+    title NoteTaker
+    link(rel="stylesheet", href="/css/style.css")
+    script(type="application/javascript", src="/components/lodash/lodash.js")
+    script(type="application/javascript", src="/components/angular/angular.js")
+    script(type="application/javascript", src="/components/ckeditor/ckeditor.js")
+    script(type="application/javascript", src="/components/angular-ckeditor/angular-ckeditor.min.js")
+    script(type="application/javascript", src="/public/note.js")
+
+body
+  div#header
+    a.logout-link(href='/logout') Logout
+  div#content
+    block content

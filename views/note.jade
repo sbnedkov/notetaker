@@ -1,0 +1,19 @@
+extends application
+
+block content
+  div(ng-controller="NoteCtrl")
+    div.notecontainer
+      span.label Title:
+      input(ng-model="note.title", name="title", type="text")
+      span.label(ng-show="note.tags.length")  Tags:
+      div.tag-container(ng-repeat="tag in note.tags", ng-show="note.tags.length")
+        span.label {{tag}}
+      div(ng-controller="CkeditorCtrl")
+        textarea(ckeditor="options", ready="onReady", ng-model="note.content", name="content", cols="80", rows="25", placeholder="enter note")
+      button.savenote(ng-click="submitNote()") Save
+      button.addtag(ng-click="addTag()") Save tag
+      input.taginput(type="text", ng-model="newtag", size="10")
+      button.goback(ng-click="back()") Back
+
+  script.
+    var noteid = "#{noteid}";

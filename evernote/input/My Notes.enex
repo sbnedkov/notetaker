@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export3.dtd">
+<en-export export-date="20150208T202022Z" application="Evernote" version="Evernote Mac 6.0.6 (451290)">
+<note><title>to try</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>paste - merge lines of files</p>
+<p>join - join lines of two files on a common field</p>
+<br clear="none"/>
+<p> </p>
+</div></en-note>]]></content><created>20120821T145049Z</created><updated>20120821T145129Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>ffmpeg</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>Reencode video:</p>
+<p> </p>
+<p>ffmpeg -an -i test.mov -f mov -vcodec rawvideo -pix_fmt rgb24 mmi-disgust.mov</p>
+<p> </p>
+<p>Camshot:</p>
+<p> </p>
+<p>ffmpeg -f video4linux2 -r 25 -t 1 -i /dev/video0 -f image2 test.jpg</p>
+<p> </p>
+<p>Make video out of images:</p>
+<p> </p>
+<p>ffmpeg -f image2 -pix_fmt yuvj420p -i frame_%03d.jpg -f mov -vcodec rawvideo -pix_fmt rgb24  frames.mov</p>
+<p>ffmpeg -f image2 -pix_fmt yuvj420p -i S999/001/S999_001_00000%03d.png -f mov -vcodec mpeg1video -pix_fmt rgb24  frames.mpg </p>
+<p> </p>
+<p>Capture webcam:</p>
+<p> </p>
+<p>ffmpeg -an -f video4linux2 -vcodec mjpeg -r 5 -b 200000 -t 20 -s 320x240 -i /dev/video0 -f mov -vcodec rawvideo -pix_fmt rgb24 me.mov</p>
+<p>ffmpeg -i me.mov -f image2 %03d.jpg</p>
+<p> </p>
+<p> </p>
+<p>Re-encode matroska file:</p>
+<p>ffmpeg -i Tekkonkinkreet.2006.720p.BluRay.x264-SiNNERS.mkv -vn -acodec copy sound.ac3</p>
+<p>ffmpeg -i sound.ac3 -acodec libmp3lame -ab 160k -ac 2 sound.mp3</p>
+<p>ffmpeg -y -sameq -i Tekkonkinkreet.2006.720p.BluRay.x264-SiNNERS.mkv -i sound.mp3 -vcodec libxvid Tekkonkinkreet.2006.720p.BluRay.x264-SiNNERS.avi</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Speed up video:</p>
+<p>ffmpeg -sameq -i empathic-1.ogv -r 16 -vf setpts=0.0625*PTS -an Output.mp4</p>
+</div></en-note>]]></content><created>20120821T144807Z</created><updated>20121202T160526Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>du</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>Find biggest</p>
+<p> </p>
+<p>Find biggest older than 3 months files:</p>
+<p> </p>
+<p>find /disk1/b3data/tomcat/webapps/weborb/upload/ -atime +90 -type f -printf &quot;%kKB \t %100p \t\t %AY-%Am-%Ad \n&quot; | sort -n | tail -n 800 &gt; ~/disk1-upload-biggest-oldest.txt    </p>
+</div></en-note>]]></content><created>20120821T144754Z</created><updated>20120821T144754Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>Note Title</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><br clear="none"/></div></en-note>]]></content><created>20090711T154801Z</created><updated>20120815T100634Z</updated><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>rpm</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><code>rpm2cpio php-5.1.4-1.esp1.x86_64.rpm | cpio -idmv</code></div></en-note>]]></content><created>20120821T144945Z</created><updated>20120821T144945Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>svn</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>svn merge -r 11971:11970 svn://asteasolutions.net/b3/trunk/build .</p>
+</div></en-note>]]></content><created>20120821T145034Z</created><updated>20120821T145034Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>find</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>find /disk1/b3data/tomcat/webapps/weborb/upload/ -atime +90 -type f -printf &quot;%kKB \t %100p \t\t %AY-%Am-%Ad \n&quot; | sort -n | tail -n 800 &gt; ~/disk1-upload-biggest-oldest.txt</p>
+<p>Find files as recent as 9 minutes ago:</p>
+<p> find media/ -mmin -9</p>
+<p>Find files larger than 5MB:</p>
+<p>find /usr/share/wallpapers/ -size +5M</p>
+</div></en-note>]]></content><created>20120821T144822Z</created><updated>20130226T134951Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>articles</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>Measuring the ROI of Software Process Improvement</p>
+<p>Integrated Requirements Engineering: A Tutorial</p>
+<p>Operational Profiles in Software-Reliability Engineering</p>
+<p>Process Control for Error-Free Software: A Software Success Story</p>
+<p>The Pragmatics of Model-Driven Development</p>
+<p>A Critical Look at Software Capability Evaluations</p>
+<p>The Incremental Funding Method: Data-Driven Software Development</p>
+<p>Beyond Blaming: Congruence in Large Systems Development Projects</p>
+<p>Using Static Analysis to Find Bugs</p>
+<p> </p>
+</div></en-note>]]></content><created>20120821T144610Z</created><updated>20120821T144610Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>ntp</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><code>ntpdate pool.ntp.org</code></div></en-note>]]></content><created>20130508T105930Z</created><updated>20130508T105930Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>gdb</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<pre xml:space="preserve">set follow-fork-mode child</pre>
+</div></en-note>]]></content><created>20120821T144846Z</created><updated>20121024T182611Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>ImageMagick</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><strong>Cropping</strong></div>
+<div>convert -crop 600x750+0+200 candide-profile.png candide-profile-cropped.png</div>
+<div><br clear="none"/></div>
+<div><strong>Split image into 12</strong></div>
+<div>convert -crop 153x26 +repage ./themes/dark/top-bar-dummy.png top-bar%02d.png</div></en-note>]]></content><created>20130416T160730Z</created><updated>20130424T115808Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>ssh</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p><span style="font-size: medium;">Tunneling stuff:</span></p>
+<p>ssh -L 33061:localhost:3306 root@unistud.asteasolutions.net -p 22816</p>
+<p> </p>
+<p><span style="font-size: medium;">Open remote X's applications locally:</span></p>
+<p> ssh -X unistud.asteasolutions.net -p 22802 -l root &quot;VirtualBox&quot;</p>
+<p>ssh -Y -l root -p 22812 r2d2.asteasolutions.net -X /extension_hd/jprobe/jsonde-1.0.0.beta7/jsonde.sh</p>
+<p> </p>
+<p><span style="font-size: medium;">Reverse tunnel:</span></p>
+<p><code>ssh -R 2000:localhost:22 user@remoteserver</code></p>
+<p> </p>
+<p><span style="font-size: medium;">Proxy:</span></p>
+<p><code>ssh -D1080 -oControlMaster=no symkat@symkat.com</code></p>
+</div></en-note>]]></content><created>20120821T145019Z</created><updated>20120821T145019Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>provider</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>tel: 9744964</en-note>]]></content><created>20090711T154647Z</created><updated>20090711T154647Z</updated><tag>provider</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>gcc</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>Create assembly listing:</p>
+<p> </p>
+<p><code>gcc -c -g -Wa,-a,-ahl=somefile.s [[any other options you need]] somefile.c</code></p>
+</div></en-note>]]></content><created>20120821T144834Z</created><updated>20120821T144834Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>awk</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p style="font-size: 12px;">awk '/DSSIM Index: / { print $3}'</p>
+<p style="font-size: 12px;"> </p>
+<p style="font-size: 12px;">awk 'match($0,&quot;publication/([^\&quot;]*png)&quot;,arr) {print arr[1]}</p>
+<p style="font-size: 12px;"> </p>
+<p>pwd | awk -F &quot;/&quot; 'n=split($0,arr) {print arr[n]}'</p>
+<p> </p>
+<p>Find the minimum of the third column of a file</p>
+<p>awk -F&quot; &quot; 'BEGIN{min = 10000} {min = min &gt; $3 ? $3 : min} END{print min}'</p>
+</div></en-note>]]></content><created>20120816T182423Z</created><updated>20120816T182423Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>pametka</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>Raneva - sutrin &lt; 13:00 chetna, sledobed &gt; 13:00 nechetni (konsultacii v chetvartak)<br clear="none"/>25-ta       9767553 (259)<br clear="none"/>domashen    591705<br clear="none"/>gsm     0888942719<br clear="none"/><br clear="none"/>Adress na sasha<br clear="none"/>1618 Buckston, block 160, entrance D, et 4<br clear="none"/><br clear="none"/>Marto Domashen: 9431255<br clear="none"/>Elka domashen:      9545377<br clear="none"/>Ani:            9478105<br clear="none"/>Ofca:           6147837274<br clear="none"/><br clear="none"/>Nova configuraciya pri Kosyo<br clear="none"/>    85.187.19.183<br clear="none"/>    255.255.255.0<br clear="none"/>    85.187.19.1<br clear="none"/><br clear="none"/>Stefo IP: 195.230.5.196<br clear="none"/>Ross IP: 195.230.4.96<br clear="none"/>Marto IP: 85.130.105.150<br clear="none"/><br clear="none"/>EGN-ta:<br clear="none"/>Dori:   7010216751<br clear="none"/><br clear="none"/>WESTERN UNION FEES:<br clear="none"/>0-100       $15<br clear="none"/>100-200 $22<br clear="none"/>200-300 $29<br clear="none"/>300-400 $35<br clear="none"/>400-500 $42<br clear="none"/>500-750 $54<br clear="none"/><br clear="none"/></en-note>]]></content><created>20090711T154458Z</created><updated>20090711T154458Z</updated><tag>pametka</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>idea</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>FILMI<br clear="none"/><br clear="none"/>Awara (Brodyaga)<br clear="none"/>Sonata ot Oginski<br clear="none"/>Sinyata ptica (kotki, hlyab, mlyako, takiva neshta)<br clear="none"/>Altman<br clear="none"/>Mosaj<br clear="none"/>appleseed - anime<br clear="none"/><br clear="none"/>MUZIKA<br clear="none"/><br clear="none"/>Ne dumay o sekundi svisoka<br clear="none"/>Leftfield<br clear="none"/>Fluke<br clear="none"/>Future sound of London<br clear="none"/>Boris Kovach<br clear="none"/>Zak de la Rocha<br clear="none"/>Triki<br clear="none"/>Atari teenage riot<br clear="none"/><br clear="none"/><br clear="none"/>KNIGI<br clear="none"/><br clear="none"/>Matrin Gardner, zanimatelna matematika?<br clear="none"/>Pelevin, 4apaev i pustota<br clear="none"/>Pablo Neruda - &quot;laughter is the language of the soul&quot;<br clear="none"/>              &lt;Title&gt;Illusions The Adventures of a Reluctant Messiah&lt;/Title&gt;<br clear="none"/>                &lt;Author&gt;Richard Bach&lt;/Author&gt;<br clear="none"/>                &lt;Date&gt;1977&lt;/Date&gt;<br clear="none"/>                &lt;ISBN&gt;0-440-34319-4&lt;/ISBN&gt;<br clear="none"/>                &lt;Publisher&gt;Dell Publishing Co.&lt;/Publisher&gt;<br clear="none"/>        &lt;/Book&gt;<br clear="none"/>        &lt;Book&gt;<br clear="none"/>                &lt;Title&gt;The First and Last Freedom&lt;/Title&gt;<br clear="none"/>                &lt;Author&gt;J. Krishnamurti&lt;/Author&gt;<br clear="none"/>                &lt;Date&gt;1954&lt;/Date&gt;<br clear="none"/>                &lt;ISBN&gt;0-06-064831-7&lt;/ISBN&gt;<br clear="none"/>                &lt;Publisher&gt;Harper &amp;amp; Row&lt;/Publisher&gt;<br clear="none"/><br clear="none"/><br clear="none"/>CHETENE<br clear="none"/>http://www.e-bane.net/modules.php?name=News&amp;file=article&amp;sid=1782<br clear="none"/><br clear="none"/></en-note>]]></content><created>20090711T154333Z</created><updated>20090711T154333Z</updated><tag>idea</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>cd burning</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>mkisofs -o hristo_cankov.iso -iso-level 3 -J -R -v .<br clear="none"/><br clear="none"/>cdrecord dev=/dev/hdc -v speed=2 hristo_cankov.iso</en-note>]]></content><created>20090711T154617Z</created><updated>20090711T154617Z</updated><tag>cd burning</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>heroku</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>heroku ps:scale web=1</div></en-note>]]></content><created>20150204T141410Z</created><updated>20150204T141418Z</updated><note-attributes><author>Svetoslav Borisov Nedkov</author><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>tc (traffic shaper)</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><pre xml:space="preserve"><span style="font-size: large;"><code>tc qdisc add dev eth0 root handle 1: tbf rate 256mbit latency 1ms burst 1540</code></span><br clear="none"/><span style="font-size: large;">tc qdisc del dev eth0 root<br clear="none"/><br clear="none"/><br clear="none"/>sudo tc qdisc add dev eth1 root netem delay 200ms<br clear="none"/></span></pre></div></en-note>]]></content><created>20130109T142117Z</created><updated>20140120T015206Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>ezines</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>Jdocs.com</en-note>]]></content><created>20090711T154433Z</created><updated>20090711T154433Z</updated><tag>ezines</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>sed</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<pre>echo &quot;Oracle DB&quot;|sed -e 's/Oracle/IBM/g' -e 's/DB/DB2/g'</pre>
+<pre>cat cdata.txt | sed -e 's/Title:\(.*\)&lt;!DOCTYPE.*/\1\n/g' -e 's/&lt;html&gt;\(.*\)&lt;\/html\&gt;/\1\n/g'</pre>
+</div></en-note>]]></content><created>20120821T145008Z</created><updated>20120821T145008Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>rojdeni</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>Bobi - 23.02<br clear="none"/>Sneja - 05.05? ili 15-ti???<br clear="none"/><br clear="none"/></en-note>]]></content><created>20090711T154515Z</created><updated>20090711T154515Z</updated><tag>rojdeni</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>mysql</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>select * from PagesElement,ProjectsPage where ProjectsPage.fkProjectId = 4943 AND ProjectsPage.fkPageId = PagesElement.fkPageId and PagesElement.attributes not like &quot;%&lt;linkURL&gt;%&lt;/linkURL&gt;%&quot; AND PagesElement.attributes like &quot;%&lt;linkType&gt;linkToURL&lt;/linkType&gt;%&quot;;</p>
+<p> </p>
+<p>mysqldump b3db --routines --comments &gt; b3dbdump.sql -uroot -p</p>
+<p>mysqldump b3db --routines  --comments -uroot -p | bzip2 &gt; b3dbdump-2011-07-08.sql.bz2</p>
+<p> </p>
+<p>select replace(xml,&quot;CFF&lt;&quot;,&quot;&lt;&quot;) from Page where id=13547 and xml COLLATE utf8_bin like &quot;%CFF%&quot;;</p>
+<p> </p>
+<p>update Page set xml=(replace(xml,&quot;CFF&quot;,&quot;&quot;)) where xml COLLATE utf8_bin like &quot;%CFF&lt;%&quot;;</p>
+<p> </p>
+<p> </p>
+<p>Mysql client commands:</p>
+<ul><li>status</li><li>show full processlist</li></ul>
+</div></en-note>]]></content><created>20120821T144920Z</created><updated>20120821T144920Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>books</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><p><span style="text-decoration: underline;">Technical</span></p><p> </p><p>* Conceptual Blockbusting</p><p>* The productive programmer by Neal Ford</p><p>* User stories applied</p><p><span style="font-family: 'Sans Serif';">* Patterns of Enterprise Application Architecture</span></p><p style="margin: 0px; text-indent: 0px;"><span style="font-family: 'Sans Serif';">* Analysis Patterns: Reusable Object Models</span></p><p style="margin: 0px; text-indent: 0px;"><span style="font-family: 'Sans Serif';">* The pragmatic programmer - from journeyman to master</span></p><p>Elements of Style by William Strunk Jr. and E.B. White</p><p>* Masterminds of programming</p><p>Object-Oriented Reengineering Patterns</p><p>Refactoring to patterns</p><p>* How to solve it, George Polya</p><p>* JLS</p><p>The Art of Computer Programming</p><p>* Software Configuration Management Patterns, Steve Berczuk</p><p>* A Pattern Language: Towns, Buildings, Construction, Christopher Alexander</p><p>Design and Use of Software Architectures: Adopting and Evolving a Product-Line Approach, Jan Bosch</p><p>Software Architecture for Product Families: Principles and Practice, Mehdi Jazayeri</p><p>* Hacker's delight, 2nd edition, Henry S. Warren</p><p>* Hackers and painters</p><p>* Martin, Robert C. Agile Software Development (Principles, Patterns, and Practices). </p><h3><span style="color: #000000; font-family: helvetica,arial,sans-serif;"><a shape="rect" href="http://www.amazon.com/NoSQL-Distilled-Emerging-Polyglot-Persistence/dp/0321826620/?tag=drdos-20" target="_blank"><span style="color: #000000;">Pramod Saldage and Martin Fowler, NoSQL Distilled</span></a></span><br clear="none"/></h3><div><h3><span style="color: #000000;"><a shape="rect" href="http://www.amazon.com/Team-Geek-Software-Developers-Working/dp/1449302440?tag=drdos-20" target="_blank"><span style="color: #000000;"><em>* Brian Fitzpatrick and Ben Collins-Sussman</em>, Team Geek</span></a></span><br clear="none"/></h3><div><h3><span style="color: #000000;"><a shape="rect" href="http://www.amazon.com/Lean-UX-Applying-Principles-Experience/dp/1449311652/?tag=drdos-20" target="_blank"><span style="color: #000000;"><em> Jeff Gothelf with Josh Seiden</em>, Lean UX</span></a></span><br clear="none"/></h3><div><span style="color: #000000;"><span style="color: #000000;">* Peopleware</span></span></div></div><div><span><br clear="none"/></span></div><div><span>* Brian P. Hogan</span>, tmux: Productive Mouse-Free Development</div></div><h1><span>* Drew Neil</span>, Practical Vim: Edit Text at the Speed of Thought</h1><div>Linda Lamb, Learning the Vi and Vim Editors</div></div><div><br clear="none"/></div><div><div><a shape="rect" href="http://shop.oreilly.com/product/9781593273880.do#tab_04_0" target="_blank">Michal Zalewski</a>, The Tangled Web: A Guide to Securing Modern Web Applications</div><div><div><div><h1><a shape="rect" href="http://www.packtpub.com/authors/profiles/dominic-barnes" target="_blank">Dominic Barnes</a>, Node Security</h1></div><div><div><div><h1><span>Operating Systems Design and Implementation (3rd Edition)</span> <span>Hardcover</span> <span>– January 14, 2006 </span>by <span> <a shape="rect" href="http://www.amazon.com/s/ref=dp_byline_sr_book_1?ie=UTF8&amp;field-author=Andrew+S+Tanenbaum&amp;search-alias=books&amp;text=Andrew+S+Tanenbaum&amp;sort=relevancerank" target="_blank">Andrew S Tanenbaum</a> </span></h1></div></div></div></div></div><div><br clear="none"/></div></div><div><br clear="none"/><p><span style="text-decoration: underline;"><em>Code complete 1st edition:</em></span></p><p>* The Psychology of Computer Programming, Gerald Weinberg</p><p>* Programming pearls, Jon Bentley</p><p>Classics in software engineering, Ed Yourdon</p><p>Principles of software engineering management, Tom Gilb</p><p>? Structured Design, Yourdon and Constantine</p><p>The art of software testing, Glenford Myers</p><p>Software engineering economics, Barry Boehm</p><p>The art of computer programming, Donald Knuth</p><p>Wicked problems, Righteous solutions, DeGrace and Stahl</p><p> </p><p><span style="text-decoration: underline;"><em>Code complete 2nd edition:</em></span></p><p>* Pragmatic Programmer (Hunt and Thomas 2000)</p><p>* Jon Bentley’s Programming Pearls, 2d Ed (Bentley 2000)</p><p>Kent Beck’s Extreme Programming Explained: Embrace Change</p><p>Writing Solid Code – Microsoft’s Techniques for Developing Bug-Free C Software (Maguire 1993)</p><p>The Practice of Programming by Brian Kernighan and Rob Pike</p><p>Programmers at Work by Susan Lammers</p><p><em>Overview Material:</em></p><p>* Robert L. Glass’s Facts and Fallacies of Software Engineering (2003)</p><p>Professional Sofware Development (2004), Steve McConnell</p><p>The Swebok: Guide to the Software Engineering Body of Knowledge (Abran 2001)</p><p>* Gerald Weinberg’s The Psychology of Computer Programming (Weinberg 1998)</p><p>Software Creativity (Glass 1995)</p><p><em>Software Engineering Overview:</em></p><p>Roger S. Pressman’s Software Engineering: A Practitioner’s Approach, 6th Ed. (Pressman 2004)</p><p>ACM Computing Reviews</p><p>Construx Software’s Professional Development Ladder (www.construx.com/ladder/)</p><p> </p><p> </p><p><span style="text-decoration: underline;">Martin Gardner:</span></p><p>Aha! Insight</p><p>Aha! Gotcha</p><p>My Best Mathematical and Logical Puzzles</p><p>Perplexing Puzzles and Tantalizing Teasers</p><p>Hexaflexagons and other Mathematical Diversions</p><p><br clear="none"/></p><p> <em>Business Adventures</em>, by John Brooks <a shape="rect" href="http://www.gatesnotes.com/Books/Business-Adventures">http://www.gatesnotes.com/Books/Business-Adventures</a><br clear="none"/></p><p><br clear="none"/></p><p><span style="text-decoration: underline;">Fictional</span></p><p> </p><p>La mechanique du coeur</p></div></en-note>]]></content><created>20120821T143734Z</created><updated>20150208T135715Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>docker</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><p style="-qt-block-indent: 0; text-indent: 0px; margin: 0px;"><span style="font-family: &quot;Courier New,courier&quot;; font-size: 10pt; font-weight: 600;">docker rm `docker ps -a | grep Exit | awk '{ print $1 }'`</span></p><p style="-qt-paragraph-type: empty; -qt-block-indent: 0; text-indent: 0px; font-family: 'Courier New,courier'; font-size: 24pt; font-weight: 600; margin: 0px;"><br clear="none"/></p><p style="-qt-block-indent: 0; text-indent: 0px; margin: 0px;"><span style="font-size: 10pt;"><span style="font-family: &quot;monospace&quot;;">docker inspect </span><span style="font-family: &quot;monospace&quot;; color: rgb(102, 0, 51);">--format</span><span style="font-family: &quot;monospace&quot;;"> </span><span style="font-family: &quot;monospace&quot;; color: rgb(255, 0, 0);">&quot;{{ .State.Pid }}&quot;</span><span style="font-family: &quot;monospace&quot;;"> </span><span style="font-family: &quot;monospace&quot;; font-weight: 600; color: rgb(0, 0, 0);">&lt;</span><span style="font-family: &quot;monospace&quot;;">container-id</span><span style="font-family: &quot;monospace&quot;; font-weight: 600; color: rgb(0, 0, 0);">&gt;</span></span></p><p style="-qt-block-indent: 0; text-indent: 0px; margin: 0px;"><span style="font-family: &quot;Courier New,courier&quot;; font-size: 10pt; font-weight: 600;">nsenter --target 30897 --mount --uts --ipc --net --pid</span></p><p style="-qt-paragraph-type: empty; -qt-block-indent: 0; text-indent: 0px; font-family: 'Courier New,courier'; font-size: 24pt; font-weight: 600; margin: 0px;"><br clear="none"/></p><p style="-qt-block-indent: 0; text-indent: 0px; margin: 0px;"><span style="font-family: &quot;Courier New,courier&quot;; font-size: 10pt; font-weight: 600;">docker run --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /home/sveto/archive/projects/MavenDocs/athena/:/home/sveto/archive/projects/MavenDocs/athena/ -p 3000:3000 7fa2e825dc4d /usr/bin/init</span></p><br clear="none"/></div></en-note>]]></content><created>20140918T194057Z</created><updated>20140918T194131Z</updated><note-attributes><author>Svetoslav Borisov Nedkov</author><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>netcat</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>Tunnel</p>
+<pre>netcat -l -p 22817 -c &quot;nc 127.0.0.1 9000&quot; -vvv</pre>
+<pre>netcat -l -p 9000 -q -1 -c &quot;nc 127.0.0.1 7070 -o traffic.out&quot; -vvv</pre>
+</div></en-note>]]></content><created>20120821T144932Z</created><updated>20120821T144932Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>screen</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>Detach a session:</p>
+<p>$ screen &lt;command&gt;</p>
+<p>Ctrl-A D</p>
+<p> </p>
+<p>Share session: (have to be logged as same user)</p>
+<p>(on first terminal)</p>
+<p>$ screen -S foo</p>
+<p>(on second terminal)</p>
+<p>$ screen -x foo</p>
+</div></en-note>]]></content><created>20120821T144957Z</created><updated>20120821T144957Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>tools</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><p><span style="font-size: large;">Monitoring:<br clear="none"/></span></p><p><span style="font-size: large;">- htop<br clear="none"/></span></p><p><span style="font-size: large;">- iotop<br clear="none"/></span></p><p><span style="font-size: large;">- glances<br clear="none"/></span></p><p><span style="font-size: large;">- munin<br clear="none"/></span></p><p><span style="font-size: large;"><br clear="none"/></span></p><p><span style="font-size: large;">Development</span></p><p> </p><p>JavaScript<br clear="none"/></p><p>Silver Searcher - A code-searching tool similar to ack, but faster. https://github.com/ggreer/the_silver_searcher</p><p><br clear="none"/></p><p><span style="font-size: medium;">Testing</span></p><p> </p><p>EclEmma - test coverage plugin for Eclipse</p><p>ConTest - Java multithreading instrumentation</p><p>mockito - <a shape="rect" href="http://code.google.com/p/mockito/" target="_blank">http://code.google.com/p/mockito/</a><br clear="none"/></p><p>fest (fixtures for easy software testing) - GUI testing</p><p>selenium - web testing automation</p><p>AgitarOne - Agitator</p><p>Cucumber - behaviour driven development (<a shape="rect" href="http://cukes.info%29/" target="_blank">http://cukes.info)</a><br clear="none"/></p><p>FitNES</p>Watir<p> </p><p><strong><span style="font-size: small;">Debugging</span></strong></p><p>memory analyzer: <a shape="rect" title="http://eclipse.org/mat/downloads.php" href="http://eclipse.org/mat/downloads.php" target="_blank">http://eclipse.org/mat/downloads.php</a><br clear="none"/></p><p>firefox tool suite - https://addons.mozilla.org/en-US/firefox/addon/web-developer/</p><p> </p><p><span style="font-size: medium;">Code Reverse Engineering</span></p><p>JSonde</p><p>Fujaba</p><p>http://java.dzone.com/articles/reverse-engineer-source-code-u</p><p> </p><p><span style="font-size: medium;">Code Analysis</span></p><p>unique - finds repeating patterns in code</p><p> </p><p><span style="font-size: medium;">Code Metrics</span></p><p>Sonar</p><p>JavaNCSS</p><p>CheckStyle</p><p> </p><p><span style="font-size: medium;">XML, HTML, xpath, xquery</span></p><p> </p><p>dom4j - can be used to verify valid XML/HTML/xpath/xquery</p><p>StAX API - in JDK, event driven parsing, higher level than SAX</p><p> </p><p> </p><p> </p><p><span style="font-size: medium;">Project Management</span></p><p> </p><p>Sonar: <a shape="rect" href="http://www.sonarsource.org/features/" target="_blank">http://www.sonarsource.org/features/</a><br clear="none"/></p><p>Swift kanban: http://www.digite.com/swift/swift-kanban.html</p><p> </p><p><span style="font-size: large;">System administration</span></p><p> </p><p><span style="font-size: medium;">Security</span></p><p> </p><p>Failtoban</p><p>Samhain - host based security (article in linux today)</p><p> </p><p><span style="font-size: medium;">Network</span></p><p> </p><p>nfdump &amp; nfsen</p><p> </p><p><span style="font-size: medium;">Browser plugins</span></p><p>disconnect</p><p> </p><p> </p><p><span style="font-size: medium;">PDF</span></p><p>iText</p><p> </p><p> </p><p><span style="font-size: medium;">Demos and Presentations</span></p><p><a shape="rect" href="http://recordmydesktop.sourceforge.net/about.php" target="_blank">http://recordmydesktop.sourceforge.net/about.php</a><br clear="none"/></p><p> </p><p> </p><p><span style="font-size: medium;">Websites</span></p><p><a shape="rect" href="http://markup.io/" target="_blank">http://markup.io/</a><br clear="none"/></p><p> </p><p><span style="font-size: medium;">JVM</span></p><p>remote VM monitoring: JConsole VisualVM</p><p>bytecode analyser: Soot</p><p>JRebel (redeploys prevented): http://www.zeroturnaround.com/jrebel/</p><p> </p><p><span style="font-size: medium;">Sharing</span></p><p>Vimeo - <a shape="rect" href="http://www.vimeo.com/" target="_blank">http://www.vimeo.com/</a><br clear="none"/></p><p> </p><p><span style="font-size: medium;">Document summary</span></p><p><a shape="rect" href="http://topicmarks.com/dashboard" target="_blank">http://topicmarks.com/dashboard</a><br clear="none"/></p><p> </p><p> </p><p><span style="font-size: medium;">Graphics</span></p><p>Processing</p><p>Geogebra</p><p> </p><p> </p><p><span style="font-size: medium;">UML</span></p><p>VP_Suite</p><p> </p><p> </p><p> </p><p><a shape="rect" name="table1"><strong>DevOps</strong></a><br clear="none"/></p><table summary="Table using a heading element for the caption, all columns left-aligned" border="0" cellpadding="0" cellspacing="0"><tr><th colspan="1" rowspan="1">Tool Type</th><th colspan="1" rowspan="1">Tools</th></tr><tr><td colspan="1" rowspan="1">Infrastructure automation</td><td colspan="1" rowspan="1">Bcfg2, CFEngine, Chef, CloudFormation, IBM Tivoli, Puppet</td></tr><tr><td colspan="1" rowspan="1">Deployment automation</td><td colspan="1" rowspan="1">Capistrano, ControlTier, Func, Glu, RunDeck</td></tr><tr><td colspan="1" rowspan="1">Infrastructure as a Service</td><td colspan="1" rowspan="1">Amazon Web Services, CloudStack, IBM SmartCloud, OpenStack, Rackspace</td></tr><tr><td colspan="1" rowspan="1">Build automation</td><td colspan="1" rowspan="1">Ant, Maven, Rake, Gradle</td></tr><tr><td colspan="1" rowspan="1">Test automation</td><td colspan="1" rowspan="1">JUnit, Selenium, Cucumber, easyb</td></tr><tr><td colspan="1" rowspan="1">Version control</td><td colspan="1" rowspan="1">Subversion, Git, IBM Rational ClearCase</td></tr><tr><td colspan="1" rowspan="1">Continuous Integration</td><td colspan="1" rowspan="1">Jenkins, CruiseControl, IBM Rational BuildForge</td></tr></table></div></en-note>]]></content><created>20120821T143915Z</created><updated>20140127T190028Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>git</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div><p>git svn init svn://asteasolutions.net/b3</p><p>git svn fetch</p><p> </p><p> </p><p>svn export equivalent:</p><p>git clone https://github.com/organicinternet/magento-configurable-simple tmp</p><p>cd tmp</p><p>git archive master | tar -x -C ../magento-configurable-simple</p><p> </p><p>reset remote tracking branch:</p><p>git checkout live<br clear="none"/>git fetch<br clear="none"/>git reset origin/live<br clear="none"/><br clear="none"/></p><p>unindex a file:<br clear="none"/></p><p>git update-index --assume-unchanged start<br clear="none"/>git update-index --no-assume-unchanged start</p><p><br clear="none"/></p><p>restrict upstream branches:<br clear="none"/></p><p>git config push.default upstream</p></div></en-note>]]></content><created>20120821T144859Z</created><updated>20141201T114158Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>python</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<pre><span style="font-size: large;"><code><span>echo </span><span>'{&quot;foo&quot;: &quot;lorem&quot;, &quot;bar&quot;: &quot;ipsum&quot;}'</span><span>|</span><span> python </span><span>-</span><span>mjson</span><span>.</span><span>tool</span></code></span></pre>
+</div></en-note>]]></content><created>20130115T153111Z</created><updated>20130115T153111Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>date</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>date +%s</div><div><br clear="none"/></div><div>date -d @1404763893</div></en-note>]]></content><created>20140725T135414Z</created><updated>20140725T135610Z</updated><note-attributes><author>Svetoslav Borisov Nedkov</author><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>tr</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<pre>tr -d '\r' &lt; dosfile.txt &gt; unixfile.txt</pre>
+</div></en-note>]]></content><created>20120821T145146Z</created><updated>20120821T145146Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>freelance sites</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>ITMoonlighter(guru.com), GetACoder.com, sycaNet.de, freelance.com</en-note>]]></content><created>20090711T154407Z</created><updated>20090711T154407Z</updated><tag>freelance sites</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>web browser user agent</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</en-note>]]></content><created>20090711T154542Z</created><updated>20090711T154542Z</updated><tag>web browser user agent</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>bash</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p>loop:</p>
+<p> </p>
+<p>for a in {0..63}; do echo $a; done</p>
+</div></en-note>]]></content><created>20120821T144740Z</created><updated>20120821T144740Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>firefox configuration</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>about:config</en-note>]]></content><created>20090711T154603Z</created><updated>20090711T154603Z</updated><tag>firefox configuration</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>syncing with the pda</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml.dtd">
+<en-note>odccm -f<br clear="none"/>export PYTHONPATH=/usr/local/lib/python2.5/site-packages/<br clear="none"/>xhost+<br clear="none"/>sync-engine<br clear="none"/><br clear="none"/>COMMANDS:<br clear="none"/>pls<br clear="none"/>pstatus<br clear="none"/>synce-*</en-note>]]></content><created>20090711T154637Z</created><updated>20090711T154637Z</updated><tag>syncing with the pda</tag><note-attributes><source-application>Evernote Web; 52108; Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/2008102920 Firefox/3.0.4</source-application><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>delete file by inode</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>stat file to get inode<br clear="none"/></div><div>  or<br clear="none"/></div><div>ls -il filename<br clear="none"/></div><div>  then<br clear="none"/></div><div>find . -inum [inode-number] -exec rm -i {} \;</div></en-note>]]></content><created>20141015T153859Z</created><updated>20141015T153926Z</updated><note-attributes><author>Svetoslav Borisov Nedkov</author><reminder-order>0</reminder-order></note-attributes></note>
+<note><title>McConnell's reading plan</title><content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">
+<en-note><div>
+<p><strong>Introductory Level</strong><br clear="none"/> * Adams, James L. Conceptual Blockbusting: A Guide to Better Ideas, 4th ed. Cambridge, Mass.: Perseus Publishing.<br clear="none"/> * Bentley, Jon. Programming Pearls, 2d Ed. Reading, Mass.: Addison-Wesley, 2000.<br clear="none"/> * Glass, Robert L. Facts and Fallacies of Software Engineering, Boston, Mass.: Addison Wesley, 2003.<br clear="none"/>* McConnell, Steve. Software Project Survival Guide. Redmond, WA: Microsoft Press, 1998.<br clear="none"/> McConnell, Steve. Code Complete, 2d Ed.. Redmond, WA: Microsoft Press, 2004.</p>
+<p> </p>
+<p><strong>Practitioner Level</strong></p>
+<p>Berczuk, Stephen P. and Brad Appleton. Software Configuration Management<br clear="none"/> Patterns: Effective Teamwork, Practical Integration, Boston, Mass.: AddisonWesley, 2003.<br clear="none"/> Fowler, Martin. UML Distilled: A Brief Guide to the Standard Object Modeling Language, 3d Ed, Boston, Mass.: Addison Wesley, 2003.<br clear="none"/> Glass, Robert L. Software Creativity, Reading, Mass.: Addison Wesley, 1995.<br clear="none"/> Kaner, Cem, Jack Falk, Hung Q. Nguyen. Testing Computer Software, 2d Ed., New York: John Wiley &amp; Sons, 1999.<br clear="none"/> Larman, Craig. Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and the Unified Process, 2d Ed., Englewood Cliffs, N.J.:<br clear="none"/> Prentice Hall, 2001. McConnell, Steve. Rapid Development. Redmond, WA: Microsoft Press, 1996.<br clear="none"/> Wiegers, Karl. Software Requirements, 2d Ed. Redmond, WA: Microsoft Press, 2003.<br clear="none"/> &quot;Manager’s Handbook for Software Development&quot;, NASA Goddard Space Flight Center. Downloadable from sel.gsfc.nasa.gov/website/documents/online-doc.htm</p>
+<p> </p>
+<p><strong>Professional Level</strong></p>
+<p>Bass, Len, Paul Clements, and Rick Kazman. Software Architecture in Practice, Second Edition, Boston, Mass.: Addison Wesley, 2003.<br clear="none"/> * Fowler, Martin. Refactoring: Improving the Design of Existing Code, Reading, Mass.: Addison Wesley, 1999.<br clear="none"/> Gamma, Erich, et al. Design Patterns, Reading, Mass.: Addison Wesley, 1995.</p>
+<p>Gilb, Tom. Principles of Software Engineering Management. Wokingham, England: Addison-Wesley.<br clear="none"/> Maguire, Steve. Writing Solid Code. Redmond, WA: Microsoft Press, 1993.<br clear="none"/> Meyer, Bertrand. Object-Oriented Software Construction, 2d Ed. New York: Prentice Hall PTR, 1997.<br clear="none"/> “Software Measurement Guidebook”, NASA Goddard Space Flight Center. Available from sel.gsfc.nasa.gov/website/documents/online-doc.htm.</p>
+</div>
+<div>McConnell's reading plan</div></en-note>]]></content><created>20120821T143823Z</created><updated>20120821T143823Z</updated><note-attributes><reminder-order>0</reminder-order></note-attributes></note>
+</en-export>

@@ -1,0 +1,66 @@
+.loginform input {
+    display: block;
+    margin: 10px;
+}
+
+.loginform button {
+    float: left;
+}
+
+.logout-link {
+    float: right;
+}
+
+.registerform input {
+    display: block;
+    margin: 10px;
+}
+
+.register-button {
+    float: left;
+}
+
+div.notecontainer {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+div.notecontainer textarea {
+    resize: none;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+div.notecontainer input[type=text] {
+    margin: 20px 0 20px;
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+}
+
+div.notecontainer button.savenote {
+    float: right;
+}
+
+div.notecontainer button.addtag {
+    float: right;
+}
+
+div.notecontainer input.taginput {
+    float: right;
+}
+
+div.notecontainer button.goback {
+    float: left;
+}
+
+div.tag-container {
+    display: inline;
+}
+
+span.label {
+    padding: 10px;
+}
