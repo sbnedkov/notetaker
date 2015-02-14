@@ -7,7 +7,7 @@ var session = require('express-session');
 var async = require('async');
 
 var environment = process.env.NODE_ENV;
-var config = require('./config.json')[environment];
+var config = require('./config/config.json')[environment];
 
 var utils = require('./src/utils');
 var db = require('./src/db')(config);

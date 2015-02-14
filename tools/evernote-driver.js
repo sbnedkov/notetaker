@@ -5,7 +5,7 @@ var moment = require('moment');
 var mongoose = require('mongoose');
 
 var environment = process.env.NODE_ENV;
-var config = require(__dirname + '/../config.json')[environment];
+var config = require(__dirname + '/../config/config.json')[environment];
 var db = require(__dirname + '/../src/db')(config);
 
 var Note = require(__dirname + '/../src/note');
