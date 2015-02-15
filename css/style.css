@@ -41,6 +41,11 @@ button {
     margin: 10px;
 }
 
+input[type=file] {
+    padding: 10px;
+    margin: 10px;
+}
+
 div.notecontainer button.savenote {
     float: right;
 }

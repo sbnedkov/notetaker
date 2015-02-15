@@ -9,7 +9,7 @@ html(ng-app="note")
     script(type="application/javascript", src="/components/angular-ckeditor/angular-ckeditor.min.js")
     script(type="application/javascript", src="/public/note.js")
 
-body
+body(ng-cloak)
   div#header
     a.logout-link(href='/logout') Logout
   div#content

@@ -1,8 +1,10 @@
 var _ = require('lodash');
 var path = require('path');
+var fs = require('fs');
 var express = require('express');
 var jade = require('jade');
 var bodyParser = require('body-parser');
+var multiparty = require('multiparty');
 var session = require('express-session');
 var async = require('async');
 
@@ -12,6 +14,8 @@ var config = require('./config/config.json')[environment];
 var utils = require('./src/utils');
 var db = require('./src/db')(config);
 var Note = require('./src/note');
+
+var evernote = require('./tools/evernote-driver');
 
 var checkUser = require('./src/middleware').checkUser;
 var checkNoUser = require('./src/middleware').checkNoUser;
@@ -128,6 +132,36 @@ app.delete('/note/:id', checkUser, function (req, res) {
 
         return res.sendStatus(200);
     });
+});
+
+app.post('/evernote', checkUser, function (req, res) {
+    var form = new multiparty.Form();
+
+    form.on('part', function (part) {
+        if (part.name === 'enex') {
+            evernote(part, req.session.user, function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+            });
+        }
+
+        part.on('error', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+        });
+    });
+
+    form.on('error', function (err) {
+        return res.status(500).send({err: err});
+    });
+
+    form.on('close', function () {
+        return res.redirect('/');
+    });
+
+    form.parse(req);
 });
 
 app.listen(config.port || process.argv[2]);

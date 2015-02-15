@@ -13,3 +13,6 @@ block content
 
   form(action="/note", method="POST")
     button New note
+  form(action="/evernote", method="POST", enctype="multipart/form-data")
+    button Evernote import
+    input(type="file", name="enex" valid-file required)
