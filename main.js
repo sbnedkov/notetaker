@@ -19,6 +19,7 @@ var evernote = require('./tools/evernote-driver');
 
 var checkUser = require('./src/middleware').checkUser;
 var checkNoUser = require('./src/middleware').checkNoUser;
+var forbidHttp = require('./src/middleware').forbidHttp;
 
 var app = express();
 
@@ -38,6 +39,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+if (environment === 'production') {
+    app.use(forbidHttp);
+}
 
 app.get('/login', checkNoUser, function (req, res) {
     res.render('login.jade');
