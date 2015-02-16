@@ -9,10 +9,9 @@ var session = require('express-session');
 var async = require('async');
 
 var environment = process.env.NODE_ENV;
-var config = require('./config/config.json')[environment];
 
 var utils = require('./src/utils');
-var db = require('./src/db')(config);
+var db = require('./src/db')(process.env);
 var Note = require('./src/note');
 
 var evernote = require('./tools/evernote-driver');
@@ -35,7 +34,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-    secret: config.session,
+    secret: process.env.session,
     resave: false,
     saveUninitialized: false
 }));
@@ -169,4 +168,4 @@ app.post('/evernote', checkUser, function (req, res) {
     form.parse(req);
 });
 
-app.listen(config.port || process.argv[2]);
+app.listen(process.env.port || process.argv[2]);

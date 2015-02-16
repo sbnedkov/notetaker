@@ -3,10 +3,6 @@ var converter = require('./evernote-converter');
 var moment = require('moment');
 var mongoose = require('mongoose');
 
-var environment = process.env.NODE_ENV;
-var config = require(__dirname + '/../config/config.json')[environment];
-
-var db = require(__dirname + '/../src/db');
 var Note = require(__dirname + '/../src/note');
 
 module.exports = function (istream, userId, callback) {
