@@ -39,9 +39,9 @@ app.use(session({
     saveUninitialized: false
 }));
 
-if (environment === 'production') {
-    app.use(forbidHttp);
-}
+//if (environment === 'production') {
+//    app.use(forbidHttp);
+//}
 
 app.get('/login', checkNoUser, function (req, res) {
     res.render('login.jade');
