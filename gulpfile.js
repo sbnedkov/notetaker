@@ -6,13 +6,13 @@ var bower = require('gulp-bower');
 var exec = require('child_process').exec;
 
 gulp.task('dev', function () {
-    nodemon({script: 'main.js', ext: 'js', ignore: ['./public'], env: {'NODE_ENV': 'development'}}).on('restart', function () {
+    return nodemon({script: 'main.js', ext: 'js', ignore: ['./public'], env: {'NODE_ENV': 'development'}}).on('restart', function () {
         console.log('restart');
     });
 });
 
 gulp.task('bower', function() {
-    bower();
+    return bower();
 });
 
 gulp.task('prod', ['bower'], function () {
