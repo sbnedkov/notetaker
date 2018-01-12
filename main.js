@@ -168,4 +168,4 @@ app.post('/evernote', checkUser, function (req, res) {
     form.parse(req);
 });
 
-app.listen(process.env.port || process.argv[2]);
+app.listen(process.env.PORT || process.argv[2]);
