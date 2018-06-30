@@ -1,9 +1,10 @@
 var note = angular.module('note', ['ckeditor']);
 
-note.controller('NoteListCtrl', ['$scope', '$http', function ($scope, $http) {
+note.controller('NoteListCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
     $http.get('/note').
         success(function (notes) {
             $scope.notes = notes;
+            $window.document.body.style = "";
         }).
         error(function (err) {
             return console.log(err);
