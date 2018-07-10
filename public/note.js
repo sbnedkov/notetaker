@@ -27,6 +27,7 @@ note.controller('NoteCtrl', ['$scope', '$http', function ($scope, $http) {
     $http.get(['/note/', $scope.noteid].join('')).
         success(function (note) {
             $scope.note = note;
+            $window.document.body.style = "";
         }).
         error(function (err) {
             return console.log(err);
