@@ -21,7 +21,7 @@ note.controller('NoteListCtrl', ['$scope', '$http', '$window', function ($scope,
     };
 }]);
 
-note.controller('NoteCtrl', ['$scope', '$http', function ($scope, $http) {
+note.controller('NoteCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
     $scope.noteid = window.noteid;
 
     $http.get(['/note/', $scope.noteid].join('')).
