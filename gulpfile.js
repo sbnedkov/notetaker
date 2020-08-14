@@ -3,7 +3,7 @@ var nodemon = require('gulp-nodemon');
 var server = require('gulp-express');
 var bower = require('gulp-bower');
 
-var exec = require('child_process').exec;
+var fork = require('child_process').fork;
 
 gulp.task('dev', gulp.series(function () {
     return nodemon({script: 'main.js', ext: 'js', ignore: ['./public'], env: {'NODE_ENV': 'development'}}).on('restart', function () {
