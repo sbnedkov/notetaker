@@ -17,12 +17,21 @@ gulp.task('bower', gulp.series(function(cb) {
 }));
 
 gulp.task('prod', gulp.series(['bower'], function (cb) {
-    cb();
-    exec('NODE_ENV=production node main.js $PORT', function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-            console.log('exec error: ' + error);
+    var server = fork('./main.js', {
+        env: {
+            NODE_ENV: 'production',
+            dburi: process.env.dburi,
+            PORT: process.env.PORT
         }
     });
+
+    server.on('data', function (data) {
+          process.stdout.write(data.toString());
+    });
+
+    server.on('close', function (code) {
+          console.log('server process exited with code ' + code);
+    });
+
+    return cb();
 }));
