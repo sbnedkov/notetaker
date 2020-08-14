@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
 module.exports = function (config) {
+    mongoose.connect(config.dburi);
+
     var db = mongoose.connection;
 
     db.on('error', console.error);
@@ -9,6 +11,4 @@ module.exports = function (config) {
         require('./note');
         require('./user');
     });
-
-    mongoose.connect(config.dburi);
 };
