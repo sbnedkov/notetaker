@@ -2,7 +2,6 @@ var _ = require('lodash');
 var path = require('path');
 var fs = require('fs');
 var express = require('express');
-var jade = require('jade');
 var bodyParser = require('body-parser');
 var multiparty = require('multiparty');
 var session = require('express-session');
@@ -23,7 +22,7 @@ var forbidHttp = require('./src/middleware').forbidHttp;
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
@@ -68,7 +67,6 @@ app.get('/', checkUser, function (req, res) {
 });
 
 app.get('/shownote/:id', checkUser, function (req, res) {
-    res.render('note.jade', {
         noteid: req.params.id
     });
 });
