@@ -67,6 +67,7 @@ app.get('/', checkUser, function (req, res) {
 });
 
 app.get('/shownote/:id', checkUser, function (req, res) {
+    res.render('note.jade', {
         noteid: req.params.id
     });
 });
