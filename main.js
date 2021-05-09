@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(session({
-    secret: process.env.session,
+    secret: process.env.sessionsecret,
     resave: false,
     saveUninitialized: false
 }));
