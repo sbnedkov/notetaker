@@ -21,7 +21,8 @@ gulp.task('prod', gulp.series(['bower'], function (cb) {
         env: {
             NODE_ENV: 'production',
             dburi: process.env.dburi,
-            PORT: process.env.PORT
+            PORT: process.env.PORT,
+            sessionsecret: process.env.sessionsecret
         }
     });
 
