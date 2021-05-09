@@ -43,7 +43,7 @@ app.use(session({
 //}
 
 app.get('/login', checkNoUser, function (req, res) {
-    res.render('login.jade');
+    res.render('login.pug');
 });
 
 app.post('/login', checkNoUser, function (req, res) {
@@ -55,7 +55,7 @@ app.get('/logout', checkUser, function (req, res) {
 });
 
 app.get('/register', checkNoUser, function (req, res) {
-    res.render('register.jade');
+    res.render('register.pug');
 });
 
 app.post('/register', checkNoUser, function (req, res) {
@@ -63,11 +63,11 @@ app.post('/register', checkNoUser, function (req, res) {
 });
 
 app.get('/', checkUser, function (req, res) {
-    res.render('main.jade');
+    res.render('main.pug');
 });
 
 app.get('/shownote/:id', checkUser, function (req, res) {
-    res.render('note.jade', {
+    res.render('note.pug', {
         noteid: req.params.id
     });
 });
