@@ -27,7 +27,7 @@
     "gulp-express": "^0.0.4",
     "gulp-nodemon": "^2.5.0",
     "lodash": "^4.17.21",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "mongoose": "^5.10.0",
     "multiparty": "^4.1.4",
     "pug": "^3.0.2",
