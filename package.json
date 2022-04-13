@@ -19,7 +19,7 @@
   "author": "sveto.n@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "async": "^2.6.1",
+    "async": "3.2.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
