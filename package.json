@@ -21,7 +21,7 @@
   "dependencies": {
     "async": "3.2.2",
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "gulp-bower": "^0.0.12",
     "gulp-express": "^0.0.4",
