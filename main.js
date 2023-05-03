@@ -7,6 +7,7 @@ var async = require('async');
 
 // var environment = process.env.NODE_ENV;
 
+require('./src/db')(process.env);
 var utils = require('./src/utils');
 var Note = require('./src/note');
 
