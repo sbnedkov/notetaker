@@ -31,7 +31,7 @@
     "mongoose": "^5.10.0",
     "multiparty": "^4.1.4",
     "pug": "^3.0.2",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.5.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2"
