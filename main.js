@@ -1,23 +1,20 @@
-var _ = require('lodash');
 var path = require('path');
-var fs = require('fs');
 var express = require('express');
 var bodyParser = require('body-parser');
 var multiparty = require('multiparty');
 var session = require('express-session');
 var async = require('async');
 
-var environment = process.env.NODE_ENV;
+// var environment = process.env.NODE_ENV;
 
 var utils = require('./src/utils');
-var db = require('./src/db')(process.env);
 var Note = require('./src/note');
 
 var evernote = require('./tools/evernote-driver');
 
 var checkUser = require('./src/middleware').checkUser;
 var checkNoUser = require('./src/middleware').checkNoUser;
-var forbidHttp = require('./src/middleware').forbidHttp;
+// var forbidHttp = require('./src/middleware').forbidHttp;
 
 var app = express();
 
@@ -38,9 +35,9 @@ app.use(session({
     saveUninitialized: false
 }));
 
-//if (environment === 'production') {
-//    app.use(forbidHttp);
-//}
+// if (environment === 'production') {
+//     app.use(forbidHttp);
+// }
 
 app.get('/login', checkNoUser, function (req, res) {
     res.render('login.pug');
@@ -73,7 +70,7 @@ app.get('/shownote/:id', checkUser, function (req, res) {
 });
 
 app.get('/note', checkUser, function (req, res) {
-    Note.find({user_id: req.session.user}).sort({'creation_date': 1}).exec(function (err, notes) {
+    Note.find({user_id: req.session.user}).sort({creation_date: 1}).exec(function (err, notes) {
         if (err) {
             return res.send(500, {err: err});
         }
@@ -108,7 +105,7 @@ app.post('/note/:id', checkUser, function (req, res) {
     async.waterfall([function (cb) {
         Note.findOne({_id: req.params.id, user_id: req.session.user}, cb);
     }, function (note, cb) {
-        _.extend(note, {
+        Object.assign(note, {
             title: req.body.title || note.title,
             content: req.body.content || note.content,
             tags: req.body.tags || note.tags

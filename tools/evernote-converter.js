@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var async = require('async');
 var fs = require('fs');
 var parseString = require('xml2js').parseString;
