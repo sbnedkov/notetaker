@@ -24,7 +24,7 @@ app.set('view engine', 'pug');
 
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/components', express.static(path.join(__dirname, 'bower_components')));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true

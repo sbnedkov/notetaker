@@ -1,22 +1,17 @@
-var gulp = require("gulp");
+var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
-var server = require('gulp-express');
-var bower = require('gulp-bower');
 
 var fork = require('child_process').fork;
 
 gulp.task('dev', gulp.series(function () {
-    return nodemon({script: 'main.js', ext: 'js', ignore: ['./public'], env: {'NODE_ENV': 'development'}}).on('restart', function () {
+    return nodemon({
+        script: 'main.js', ext: 'js', ignore: ['./public'], env: { NODE_ENV: 'development' }
+    }).on('restart', function () {
         console.log('restart');
     });
 }));
 
-gulp.task('bower', gulp.series(function(cb) {
-    bower();
-    return cb();
-}));
-
-gulp.task('prod', gulp.series(['bower'], function (cb) {
+gulp.task('prod', gulp.series([], function (cb) {
     var server = fork('./main.js', {
         env: {
             NODE_ENV: 'production',
