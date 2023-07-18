@@ -29,7 +29,7 @@
         "express-session": "1.17.3",
         "gulp-nodemon": "2.5.0",
         "moment": "2.29.4",
-        "mongoose": "5.13.17",
+        "mongoose": "5.13.20",
         "multiparty": "4.1.4",
         "pug": "3.0.2",
         "xml2js": "0.5.0"
