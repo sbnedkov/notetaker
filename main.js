@@ -11,8 +11,6 @@ require('./src/db')(process.env);
 var utils = require('./src/utils');
 var Note = require('./src/note');
 
-var evernote = require('./tools/evernote-driver');
-
 var checkUser = require('./src/middleware').checkUser;
 var checkNoUser = require('./src/middleware').checkNoUser;
 // var forbidHttp = require('./src/middleware').forbidHttp;
@@ -133,36 +131,6 @@ app.delete('/note/:id', checkUser, function (req, res) {
 
         return res.sendStatus(200);
     });
-});
-
-app.post('/evernote', checkUser, function (req, res) {
-    var form = new multiparty.Form();
-
-    form.on('part', function (part) {
-        if (part.name === 'enex') {
-            evernote(part, req.session.user, function (err) {
-                if (err) {
-                    return console.log(err);
-                }
-            });
-        }
-
-        part.on('error', function (err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
-    });
-
-    form.on('error', function (err) {
-        return res.status(500).send({err: err});
-    });
-
-    form.on('close', function () {
-        return res.redirect('/');
-    });
-
-    form.parse(req);
 });
 
 app.listen(process.env.PORT || process.argv[2]);
