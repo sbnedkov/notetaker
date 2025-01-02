@@ -1,33 +1,28 @@
 import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
-import multiparty from 'multiparty';
 import session from 'express-session';
 import cors from 'express-cors';
-import async from 'async';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import csurf from 'tiny-csrf';
 import MongoStore from 'connect-mongo';
+import mongoose from 'mongoose';
 
 import db from './db';
 import { loginUser, logoutUser } from './utils';
-import Note from './note';
 import { checkUser, checkNoUser } from './middleware';
-
-const mongooseClient = await db(process.env);
-const app = express();
 
 async function init() {
     if (!process.env.cookieSecret || !process.env.sessionSecret) {
         throw new Error('Please supply env variables "cookieSecret", "sessionSecret".');
     }
 
+    const app = express();
+
     const mongooseClient = await db({ dburi: process.env.dburi });
     const User = mongoose.model('User');
     const Note = mongoose.model('Note');
-
-    const app = express();
 
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'pug');
@@ -47,7 +42,7 @@ async function init() {
         secret: process.env.sessionSecret,
         resave: false,
         saveUninitialized: false,
-        store: connect_mongo_1.default.create({ client: mongooseClient }),
+        store: MongoStore.create({ client: mongooseClient }),
     }));
     app.use(csurf(process.env.csurfSecret));
 
@@ -87,7 +82,7 @@ async function init() {
         const note = new Note({
             user_id: req.session.user
         });
-        async note.save();
+        await note.save();
         res.redirect(['/shownote/', note._id].join(''));
     });
 
@@ -106,7 +101,7 @@ async function init() {
     });
 
     app.delete('/note/:id', checkUser, async function (req, res) {
-        const note = yield Note.findOne({ _id: req.params.id, user_id: req.session.user });
+        const note = await Note.findOne({ _id: req.params.id, user_id: req.session.user });
         if (!note) {
             throw new Error('Could not find note.');
         }
