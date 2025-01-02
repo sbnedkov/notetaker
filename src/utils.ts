@@ -4,23 +4,21 @@ import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 
 const User = mongoose.model('User');
-export default {
-    loginUser: async function (req: Request, res: Response) {
-        const user = await auth(req);
+export async function loginUser (req: Request, res: Response) {
+    const user = await auth(req);
 
-        if (user) {
-            req.session.user = user._id;
-            res.redirect('/');
-        } else {
-            res.sendStatus(401);
-        }
-    },
+    if (user) {
+        req.session.user = user._id;
+        res.redirect('/');
+    } else {
+        res.sendStatus(401);
+    }
+}
 
-    logoutUser: function (req: Request, res: Response) {
-        delete req.session.user;
-        res.redirect('/login');
-    },
-};
+export function logoutUser (req: Request, res: Response) {
+    delete req.session.user;
+    res.redirect('/login');
+}
 
 function passwordHash (password: string, salt: string) {
     var shaSum = crypto.createHash('sha1');

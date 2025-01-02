@@ -11,6 +11,9 @@ export default async function db({ dburi }: { dburi: string|undefined }) {
     const db = mongoose.connection;
     db.on('error', console.error);
 
+    note();
+    user();
+
     return db.getClient();
 };
 
