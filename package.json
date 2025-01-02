@@ -9,9 +9,7 @@
   },
   "main": "main.js",
   "scripts": {
-    "gulp": "gulp",
-    "dev": "npm run gulp dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -fr ./dist; tsc"
   },
   "keywords": [
     "notes",
@@ -21,23 +19,30 @@
   "author": "sveto.n@gmail.com",
   "license": "MIT",
   "dependencies": {
-    "angular": "^1.8.3",
-    "angular-editor": "^0.0.3",
-    "angular1-ckeditor": "1.0.3",
-    "async": "3.2.2",
-    "body-parser": "1.20.1",
-    "express": "4.18.2",
-    "express-session": "1.17.3",
-    "gulp-nodemon": "2.5.0",
+    "body-parser": "^1.20.3",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "express-cors": "^0.0.3",
+    "express-session": "^1.18.1",
     "moment": "2.29.4",
+    "mongodb": "^6.12.0",
     "mongoose": "^8.9.3",
-    "multiparty": "4.1.4",
-    "pug": "3.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9",
+    "tiny-csrf": "^1.1.4",
     "xml2js": "0.5.0"
   },
   "devDependencies": {
-    "gulp": "4.0.2",
-    "nx": "20.3.0"
-  },
-  "nx": {}
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.0",
+    "@types/express-session": "^1.18.1",
+    "@types/mongodb": "^4.0.6",
+    "@types/mongoose": "^5.11.96",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.10.3",
+    "gulp": "^5.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "typescript": "~5.6.2"
+  }
 }

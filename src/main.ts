@@ -1,42 +1,48 @@
-var path = require('path');
-var express = require('express');
-var bodyParser = require('body-parser');
-var multiparty = require('multiparty');
-var session = require('express-session');
-var async = require('async');
+import path from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
+import multiparty from 'multiparty';
+import session from 'express-session';
+import cors from 'express-cors';
+import async from 'async';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import csurf from 'tiny-csrf';
+import MongoStore from 'connect-mongo';
 
-// var environment = process.env.NODE_ENV;
+import db from './db';
+import utils from './utils';
+import Note from './note';
+import { checkUser, checkNoUser } from './middleware';
 
-require('./src/db')(process.env);
-var utils = require('./src/utils');
-var Note = require('./src/note');
-
-var checkUser = require('./src/middleware').checkUser;
-var checkNoUser = require('./src/middleware').checkNoUser;
-// var forbidHttp = require('./src/middleware').forbidHttp;
-
-var app = express();
+const mongooseClient = await db(process.env);
+const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use(cors({
+    allowedOrigins: [
+        'notetaker.sbnedkov.com'
+    ]
+}));
+app.use(morgan('combined'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
-
+app.use(cookieParser(process.env.cookieSecret));
 app.use(session({
-    secret: process.env.sessionsecret,
+    secret: process.env.sessionSecret,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: MongoStore.create({ client: mongooseClient }),
 }));
 
-// if (environment === 'production') {
-//     app.use(forbidHttp);
-// }
+app.use(csurf(
+    process.env.csurfSecret,
+));
 
 app.get('/login', checkNoUser, function (req, res) {
     res.render('login.pug');
@@ -68,13 +74,9 @@ app.get('/shownote/:id', checkUser, function (req, res) {
     });
 });
 
-app.get('/note', checkUser, function (req, res) {
-    Note.find({user_id: req.session.user}).sort({creation_date: 1}).exec(function (err, notes) {
-        if (err) {
-            return res.send(500, {err: err});
-        }
-        res.json(notes);
-    });
+app.get('/note', checkUser, async function (req, res) {
+    const notes = await Note.find({user_id: req.session.user}).sort({creation_date: 1});
+    res.json(notes);
 });
 
 app.get('/note/:id', checkUser, function (req, res) {
@@ -87,7 +89,7 @@ app.get('/note/:id', checkUser, function (req, res) {
 });
 
 app.post('/note', checkUser, function (req, res) {
-    var note = new Note({
+    const note = new Note({
         user_id: req.session.user
     });
 

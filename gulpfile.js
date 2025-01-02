@@ -1,23 +1,24 @@
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-
-var fork = require('child_process').fork;
+const gulp = require('gulp');
+const fork = require('child_process').fork;
+const ts = require('gulp-typescript');
 
 gulp.task('dev', gulp.series(function () {
-    return nodemon({
-        script: 'main.js', ext: 'js', ignore: ['./public'], env: { NODE_ENV: 'development' }
-    }).on('restart', function () {
+    return gulp.series([ts(), gulp.watch({
+        script: 'dist/main.js', ext: 'js', ignore: ['./public'], env: { NODE_ENV: 'development' }
+    }).on('restart', gulp.series([ts(), function () {
         console.log('restart');
-    });
+    }]))]);
 }));
 
-gulp.task('prod', gulp.series([], function (cb) {
-    var server = fork('./main.js', {
+gulp.task('prod', function (cb) {
+    const server = fork('./main.js', {
         env: {
             NODE_ENV: 'production',
             dburi: process.env.dburi,
             PORT: process.env.PORT,
-            sessionsecret: process.env.sessionsecret
+            cookieSecret: process.env.cookieSecret,
+            sessionSecret: process.env.sessionSecret,
+            csurfSecret: process.env.csurfSecret,
         }
     });
 
@@ -30,4 +31,4 @@ gulp.task('prod', gulp.series([], function (cb) {
     });
 
     return cb();
-}));
+});
