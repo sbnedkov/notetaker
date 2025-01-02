@@ -48,13 +48,9 @@ async function init() {
     app.use(csrf());
     app.use(checkCsrf());
 
-    app.post('/login', function (req, res) {
-        loginUser(req, res);
-    });
+    app.post('/login', loginUser);
 
-    app.get('/logout', checkUser, function (req, res) {
-        logoutUser(req, res);
-    });
+    app.get('/logout', checkUser, logoutUser);
 
     app.get('/', checkUser, function (req, res) {
         res.render('main.pug');

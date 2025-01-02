@@ -5,25 +5,29 @@ import mongoose from 'mongoose';
 import { randomUUID } from 'crypto';
 
 export async function loginUser (req: Request, res: Response) {
-    const user = await auth(req);
+    try {
+        const user = await auth(req);
 
-    if (user) {
-        req.session.user = user._id;
-        res.redirect('/');
-    } else {
-        res.sendStatus(401);
+        if (user) {
+            req.session.user = user._id;
+            return res.redirect('/');
+        }
+    } catch (err) {
+        console.error(err);
     }
+
+    res.sendStatus(401);
 }
 
 export function logoutUser (req: Request, res: Response) {
     delete req.session.user;
-    res.redirect('/login');
+    res.redirect('/');
 }
 
 export function csrf () {
     return (req: Request, res: Response, next: NextFunction) => {
         const csrf = randomUUID();
-        res.header('x-csrf-token', csrf);
+        res.header('X-XSRF-TOKEN', csrf);
         if (!req.session.csrf) {
             res.locals.firstRequest = true;
         }
@@ -44,7 +48,7 @@ export function checkCsrf () {
 }
 
 function passwordHash (password: string, salt: string) {
-    var shaSum = crypto.createHash('sha1');
+    const shaSum = crypto.createHash('sha1');
     shaSum.update([password, ':', salt].join(''));
     return shaSum.digest('base64');
 }
@@ -58,7 +62,7 @@ async function auth (req: Request) {
     const user = await User.findOne({username: req.body.username});
 
     if (user) {
-        var hash = passwordHash(req.body.password, user.salt);
+        const hash = passwordHash(req.body.password, user.salt);
         delete req.body.password;
 
         if (hash === user.passwordHash) {

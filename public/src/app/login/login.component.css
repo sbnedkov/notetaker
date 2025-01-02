@@ -1,0 +1,12 @@
+div.loginform {
+    display: block;
+}
+
+.loginform input {
+    display: block;
+    margin: 10px;
+}
+
+.loginform button {
+    float: left;
+}

@@ -1,13 +1,1 @@
-<div id="header"><a class="logout-link" href="/logout">Logout</a></div>
-<div id="content">
-    <div>
-        <ul class="notelist" *ngFor="let note of notes$ | async">
-            <li class="note"><a href="/shownote/{{note._id}}">{{note.title}} ({{note.creation_date | date: 'yyyy-MM-dd HH:mm:ss'}})</a><button ngClick="remove(note._id)">Delete</button>
-                <div [hidden]="!note.tags.length"><span class="label">Tags:</span>
-                    <div class="tag-container" *ngFor="let tag of note.tags"><span class="label">{{tag}}</span></div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <form action="/note" method="POST"><button>New note</button></form>
-</div>
+<router-outlet></router-outlet>
