@@ -12,7 +12,7 @@ import mongoose from 'mongoose';
 
 import db from './db';
 import { loginUser, logoutUser, csrf, checkCsrf } from './utils';
-import { checkUser, checkNoUser } from './middleware';
+import { checkUser } from './middleware';
 
 async function init() {
     if (!process.env.cookieSecret || !process.env.sessionSecret) {
@@ -48,11 +48,7 @@ async function init() {
     app.use(csrf());
     app.use(checkCsrf());
 
-    app.get('/login', checkNoUser, function (req, res) {
-        res.render('login.pug');
-    });
-
-    app.post('/login', checkNoUser, function (req, res) {
+    app.post('/login', function (req, res) {
         loginUser(req, res);
     });
 
