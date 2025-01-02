@@ -1,3 +1,5 @@
+import 'source-map-support/register'
+
 import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -5,12 +7,11 @@ import session from 'express-session';
 import cors from 'express-cors';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import csurf from 'tiny-csrf';
 import MongoStore from 'connect-mongo';
 import mongoose from 'mongoose';
 
 import db from './db';
-import { loginUser, logoutUser } from './utils';
+import { loginUser, logoutUser, csrf, checkCsrf } from './utils';
 import { checkUser, checkNoUser } from './middleware';
 
 async function init() {
@@ -29,7 +30,7 @@ async function init() {
 
     app.use(cors({
         allowedOrigins: [
-            'notetaker.sbnedkov.com'
+            'notetaker.sbnedkov.com',
         ]
     }));
     app.use(morgan('combined'));
@@ -44,7 +45,8 @@ async function init() {
         saveUninitialized: false,
         store: MongoStore.create({ client: mongooseClient }),
     }));
-    app.use(csurf(process.env.csurfSecret));
+    app.use(csrf());
+    app.use(checkCsrf());
 
     app.get('/login', checkNoUser, function (req, res) {
         res.render('login.pug');

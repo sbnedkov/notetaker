@@ -25,12 +25,13 @@
     "express": "^4.21.2",
     "express-cors": "^0.0.3",
     "express-session": "^1.18.1",
+    "gulp-sourcemaps": "^2.6.5",
     "moment": "2.29.4",
     "mongodb": "^6.12.0",
     "mongoose": "^8.9.3",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.9",
-    "tiny-csrf": "^1.1.4",
+    "source-map-support": "^0.5.21",
     "xml2js": "0.5.0"
   },
   "devDependencies": {
