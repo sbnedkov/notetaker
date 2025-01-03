@@ -1,22 +1,23 @@
-import { Component, AfterContentInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-//    styles: ['.loginform { display: none; }'],
     styleUrls: ['./login.component.css', '../app.component.css'],
-    standalone: true,
+    standalone: false,
 })
-export class LoginComponent implements AfterContentInit {
+export class LoginComponent implements OnInit {
     title = 'NoteTaker';
-    public loading = true;
     public loginAction = 'http://localhost:31313/login'; // TODO
+    public loadingClass = 'loading'
+    public loading = true;
 
     constructor (private http: HttpClient) {
     }
 
-    ngAfterContentInit () {
+    ngOnInit () {
         this.loading = false;
+        this.loadingClass = 'loaded';
     }
 }

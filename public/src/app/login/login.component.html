@@ -1,4 +1,4 @@
-<div [hidden]="loading">
+<div [class]="loadingClass" style="display: none;">
     <form class="loginform" action="{{loginAction}}" method="POST">
         <input name="username" type="text">
         <input name="password" type="password">
