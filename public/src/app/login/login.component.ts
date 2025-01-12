@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { switchMap } from 'rxjs'
 
 import { environment } from '../../environments/environment';
 import { BaseComponent } from '../base.component'
@@ -8,7 +9,7 @@ import { BaseComponent } from '../base.component'
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+    styleUrls: ['../app.component.css', './login.component.css'],
     standalone: false,
 })
 export class LoginComponent extends BaseComponent {
@@ -21,16 +22,19 @@ export class LoginComponent extends BaseComponent {
     }
 
     public login (username: string, password: string) {
-        this.http.post<{ ok: boolean }>(this.loginAction, {
-            username,
-            password,
-        }, {
-            withCredentials: true,
-            headers: {
-                'X-Csrf-Token': this.token
-            },
-        }).subscribe((result: { ok: boolean }) => {
+        const subscription = this.token$.pipe(switchMap(token =>
+            this.http.post<{ ok: boolean }>(this.loginAction, {
+                username,
+                password,
+            }, {
+                withCredentials: true,
+                headers: {
+                    'X-Csrf-Token': token
+                },
+            }),
+        )).subscribe((result: { ok: boolean }) => {
             this.router.navigate([''], { queryParams: { logged: result.ok } });
+            subscription.unsubscribe();
         });
     }
 }

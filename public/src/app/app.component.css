@@ -1,3 +1,7 @@
+.loaded {
+    display: block !important;
+}
+
 .logout-link {
     float: right;
 }

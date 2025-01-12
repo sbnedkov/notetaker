@@ -39,9 +39,7 @@ async function init() {
         },
     })
 
-    app.set('views', path.join(__dirname, 'views'));
-    app.set('view engine', 'pug');
-
+    app.use(morgan('combined'));
     app.use(cors({
         allowedOrigins: [
             'http://localhost:4200',
@@ -53,7 +51,6 @@ async function init() {
             'X-Csrf-Token',
         ],
     }));
-    app.use(morgan('combined'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
         extended: false
@@ -72,7 +69,6 @@ async function init() {
     app.use(doubleCsrfProtection);
 
     app.post('/login', loginUser);
-
     app.get('/logout', checkUser, logoutUser);
 
     app.get('/note', checkUser, async function (req, res) {
