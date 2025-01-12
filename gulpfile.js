@@ -15,15 +15,15 @@ task('build', function () {
         .pipe(dest('./dist'));
 });
 
-task('prod', function (cb) {
+task('production', function (cb) {
     server = fork('./dist/main.js', {
         env: {
-            NODE_ENV: 'production',
+            NODE_ENV: process.env.NODE_ENV,
             dburi: process.env.dburi,
             PORT: process.env.PORT,
             cookieSecret: process.env.cookieSecret,
             sessionSecret: process.env.sessionSecret,
-            csurfSecret: process.env.csurfSecret,
+            csrfSecret: process.env.csrfSecret,
         }
     });
 
@@ -43,6 +43,6 @@ task('kill', function (cb) {
     return cb();
 });
 
-task('watch', cb => watch(['./src/**/*'], series([cb => { console.log('restarting...'); cb(); } , 'kill', 'build', 'prod', 'watch', () => cb()])));
+task('watch', cb => watch(['./src/**/*'], series([cb => { console.log('restarting...'); cb(); } , 'kill', 'build', 'production', 'watch', () => cb()])));
 
-task('dev', parallel([series(['build', 'prod']), 'watch']));
+task('dev', parallel([series(['build', 'production']), 'watch']));

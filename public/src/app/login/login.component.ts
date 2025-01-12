@@ -1,23 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+import { environment } from '../../environments/environment';
+import { BaseComponent } from '../base.component'
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css', '../app.component.css'],
+    styleUrls: ['./login.component.css'],
     standalone: false,
 })
-export class LoginComponent implements OnInit {
-    title = 'NoteTaker';
-    public loginAction = 'http://localhost:31313/login'; // TODO
-    public loadingClass = 'loading'
-    public loading = true;
+export class LoginComponent extends BaseComponent {
+    public loginAction = `${environment.apiUrl}/login`;
+    public username!: string
+    public password!: string
 
-    constructor (private http: HttpClient) {
+    constructor (http: HttpClient, router: Router) {
+        super(http, router)
     }
 
-    ngOnInit () {
-        this.loading = false;
-        this.loadingClass = 'loaded';
+    public login (username: string, password: string) {
+        this.http.post<{ ok: boolean }>(this.loginAction, {
+            username,
+            password,
+        }, {
+            withCredentials: true,
+            headers: {
+                'X-Csrf-Token': this.token
+            },
+        }).subscribe((result: { ok: boolean }) => {
+            this.router.navigate([''], { queryParams: { logged: result.ok } });
+        });
     }
 }

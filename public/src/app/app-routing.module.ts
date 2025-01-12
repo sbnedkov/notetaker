@@ -5,24 +5,26 @@ import { NotesComponent } from './notes/notes.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 
-const canActivate: CanActivateFn = (
+const canLogin: CanActivateFn = (
     route: ActivatedRouteSnapshot,
 ) => {
-    return inject(LoginService).canActivate(route.params['id']);
+    return inject(LoginService).canLogin(route.queryParams['logged']);
+};
+
+const canLogout: CanActivateFn = (
+    route: ActivatedRouteSnapshot,
+) => {
+    return inject(LoginService).canLogout(route.queryParams['logged']);
 };
 
 const routes: Routes = [{
     path: '',
-    canActivate: [canActivate],
-    component: NotesComponent
+    canActivate: [canLogout],
+    component: NotesComponent,
 }, {
     path: 'login',
-    canActivate: [],
-    component: LoginComponent
-}, {
-    path: 'notes',
-    canActivate: [canActivate],
-    component: NotesComponent
+    canActivate: [canLogin],
+    component: LoginComponent,
 }];
 
 @NgModule({

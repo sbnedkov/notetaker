@@ -1,7 +1,7 @@
 <div [class]="loadingClass" style="display: none;">
-    <form class="loginform" action="{{loginAction}}" method="POST">
-        <input name="username" type="text">
-        <input name="password" type="password">
-        <button>Log in</button>
+    <form #loginForm class="loginform">
+        <input name="username" [(ngModel)]="username" type="text">
+        <input name="password" [(ngModel)]="password" type="password">
+        <button (click)="login(username, password)">Log in</button>
     </form>
 </div>

@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -16,9 +17,10 @@ import { AppRoutingModule } from './app-routing.module';
         NotesComponent,
     ],
     imports: [
-        BrowserModule,
         AppRoutingModule,
+        BrowserModule,
         CommonModule,
+        FormsModule,
         HttpClientModule,
         HttpClientXsrfModule,
     ],

@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, map, catchError} from 'rxjs';
+
+import { environment } from '../../environments/environment';
+import { BaseComponent } from '../base.component'
 
 @Component({
     selector: 'app-notes',
@@ -8,13 +12,13 @@ import { Observable, map, catchError} from 'rxjs';
     styleUrls: ['../app.component.css', './notes.component.css'],
     standalone: false,
 })
-export class NotesComponent {
-    title = 'NoteTaker';
-
+export class NotesComponent extends BaseComponent {
     public notes$: Observable<INote[]>;
 
-    constructor (private http: HttpClient) {
-        this.notes$ = http.get<INote[]>('http://localhost:31313/note') // TODO: fix API endpoint
+    constructor (http: HttpClient, router: Router) {
+        super(http, router)
+
+        this.notes$ = http.get<INote[]>(`${environment.apiUrl}/note`)
             .pipe(
                 map(response => {
                     if (response) {
@@ -29,6 +33,17 @@ export class NotesComponent {
                     return []
                 }),
             );
+    }
+
+    public logout () {
+        this.http.get<{ ok: boolean }>(`${environment.apiUrl}/note`, {
+            withCredentials: true,
+            headers: {
+                'X-Csrf-Token': this.token
+            },
+        }).subscribe((result: { ok: boolean }) => {
+            this.router.navigate(['login']);
+        });
     }
 }
 

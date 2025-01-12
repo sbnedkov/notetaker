@@ -10,41 +10,19 @@ export async function loginUser (req: Request, res: Response) {
 
         if (user) {
             req.session.user = user._id;
-            return res.redirect('/');
+            res.json({ ok: true });
+        } else {
+            res.sendStatus(401);
         }
     } catch (err) {
         console.error(err);
+        res.sendStatus(401);
     }
-
-    res.sendStatus(401);
 }
 
 export function logoutUser (req: Request, res: Response) {
     delete req.session.user;
-    res.redirect('/');
-}
-
-export function csrf () {
-    return (req: Request, res: Response, next: NextFunction) => {
-        const csrf = randomUUID();
-        res.header('X-XSRF-TOKEN', csrf);
-        if (!req.session.csrf) {
-            res.locals.firstRequest = true;
-        }
-        req.session.csrf = csrf;
-        next();
-    }
-}
-
-export function checkCsrf () {
-    return (req: Request, res: Response, next: NextFunction) => {
-        if (!res.locals.firstRequest && req.body.csrf !== req.session.csrf) {
-            res.sendStatus(403);
-            next(new Error('Forbidden'));
-        } else {
-            next();
-        }
-    }
+    res.json({ ok: true });
 }
 
 function passwordHash (password: string, salt: string) {

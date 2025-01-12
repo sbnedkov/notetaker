@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, UrlTree } from '@angular/router';
 
 @Injectable()
 export class LoginService {
     constructor(private router: Router) {
     }
 
-    canActivate (userId: string): boolean {
-        if (!userId) {
-            this.router.navigate(['login']);
-            return false;
+    canLogin (isLogged: boolean): boolean|UrlTree {
+        if (isLogged) {
+            return this.router.parseUrl('');
+        }
+
+        return true;
+    }
+
+    canLogout (isLogged: boolean): boolean|UrlTree {
+        if (!isLogged) {
+            return this.router.parseUrl('login');
         }
 
         return true;

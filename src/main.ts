@@ -9,15 +9,17 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
 import mongoose from 'mongoose';
+import { doubleCsrf } from 'csrf-csrf';
 
 import db from './db';
-import { loginUser, logoutUser, csrf, checkCsrf } from './utils';
+import { loginUser, logoutUser } from './utils';
 import { checkUser } from './middleware';
 
 async function init() {
-    if (!process.env.cookieSecret || !process.env.sessionSecret) {
-        throw new Error('Please supply env variables "cookieSecret", "sessionSecret".');
+    if (!process.env.cookieSecret || !process.env.sessionSecret || !process.env.csrfSecret) {
+        throw new Error('Please supply env variables "cookieSecret", "sessionSecret" and "csrfSecret".');
     }
+    const csrfSecret = process.env.csrfSecret
 
     const app = express();
 
@@ -25,13 +27,31 @@ async function init() {
     const User = mongoose.model('User');
     const Note = mongoose.model('Note');
 
+    const {
+        generateToken,
+        doubleCsrfProtection,
+    } = doubleCsrf({
+        getSecret: () => csrfSecret,
+        cookieName: 'x-csrf-token',
+        cookieOptions: {
+            sameSite: 'lax',
+            secure: process.env.NODE_ENV !== 'dev',
+        },
+    })
+
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'pug');
 
     app.use(cors({
         allowedOrigins: [
-            'notetaker.sbnedkov.com',
-        ]
+            'http://localhost:4200',
+            'https://notetaker.sbnedkov.com',
+        ],
+        headers: [
+            'X-Requested-With',
+            'Content-Type',
+            'X-Csrf-Token',
+        ],
     }));
     app.use(morgan('combined'));
     app.use(bodyParser.json());
@@ -45,22 +65,15 @@ async function init() {
         saveUninitialized: false,
         store: MongoStore.create({ client: mongooseClient }),
     }));
-    app.use(csrf());
-    app.use(checkCsrf());
+    app.get('/csrf', function (req, res) {
+        const csrf = generateToken(req, res);
+        res.json(csrf)
+    })
+    app.use(doubleCsrfProtection);
 
     app.post('/login', loginUser);
 
     app.get('/logout', checkUser, logoutUser);
-
-    app.get('/', checkUser, function (req, res) {
-        res.render('main.pug');
-    });
-
-    app.get('/shownote/:id', checkUser, function (req, res) {
-        res.render('note.pug', {
-            noteid: req.params.id
-        });
-    });
 
     app.get('/note', checkUser, async function (req, res) {
         const notes = await Note.find({ user_id: req.session.user }).sort({ creation_date: 1 });
