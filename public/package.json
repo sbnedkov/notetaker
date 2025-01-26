@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
+    "@primeng/themes": "^19.0.5",
     "rxjs": "^7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -28,9 +29,8 @@
     "@angular-devkit/schematics": "^19.0.6",
     "@angular/cli": "^19.0.6",
     "@angular/compiler-cli": "^19.0.0",
-    "@nx/angular": "20.3.0",
+    "@nx/angular": "^20.1.4",
     "@nx/workspace": "20.3.0",
-    "@primeng/themes": "^19.0.5",
     "@schematics/angular": "^19.0.6",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.4.0",
