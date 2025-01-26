@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, catchError, map, switchMap, tap, } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { BaseComponent } from '../base.component'
+import { BaseComponent, INote } from '../base.component'
 
 @Component({
     selector: 'app-notes',
@@ -21,6 +21,7 @@ export class NotesComponent extends BaseComponent implements OnInit {
 
     public override ngOnInit () {
         super.ngOnInit();
+
         this.notes$ = this.token$.pipe(
             switchMap(token => this.http.get<INote[]>(`${environment.apiUrl}/note`, {
                 withCredentials: true,
@@ -42,27 +43,24 @@ export class NotesComponent extends BaseComponent implements OnInit {
         );
     }
 
+    public openNote (_id: string) {
+        this.router.navigate(['note'], { state: { _id }, queryParams: { logged: true } })
+    }
+
     public logout () {
         this.token$.pipe(
-            switchMap(token => this.http.get<{ ok: boolean }>(`${environment.apiUrl}/note`, {
+            switchMap(token => this.http.get<{ ok: boolean }>(`${environment.apiUrl}/logout`, {
                     withCredentials: true,
                     headers: {
                         'X-Csrf-Token': token
                     },
                 }),
             ),
-            tap((result: { ok: boolean }) =>
+        )
+        .subscribe((result: { ok: boolean }) => {
+            if (result.ok) {
                 this.router.navigate(['login'])
-            ),
-        );
+            }
+        })
     }
-}
-
-interface INote {
-    _id: string,
-    user_id: string
-    title: string
-    content: string
-    creation_date: Date
-    tags: string[]
 }

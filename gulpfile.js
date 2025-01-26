@@ -11,6 +11,7 @@ task('build', function () {
     return src('./src/**/*')
         .pipe(sourcemaps.init())
         .pipe(tsProject())
+        .on('error', err => console.error(`!!! Error, waiting for changes to retry: ${err}`))
         .pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: '../lib' }))
         .pipe(dest('./dist'));
 });

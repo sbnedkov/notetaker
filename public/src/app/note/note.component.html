@@ -1,0 +1,3 @@
+<div *ngIf="note$ | async as note">
+    <p-editor [(ngModel)]="note.content" [style]="{ height: '320px' }" />
+</div>

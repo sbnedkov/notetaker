@@ -23,3 +23,12 @@ export abstract class BaseComponent implements OnInit {
         this.loadingClass = 'loaded';
     }
 }
+
+export interface INote {
+    _id: string,
+    user_id: string
+    title: string
+    content: string
+    creation_date: Date
+    tags: string[]
+}

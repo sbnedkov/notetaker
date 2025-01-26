@@ -1,6 +1,7 @@
 import { NgModule, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn,RouterModule, Routes } from '@angular/router';
 
+import { NoteComponent } from './note/note.component';
 import { NotesComponent } from './notes/notes.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
@@ -21,6 +22,10 @@ const routes: Routes = [{
     path: '',
     canActivate: [canLogout],
     component: NotesComponent,
+}, {
+    path: 'note',
+    canActivate: [canLogout],
+    component: NoteComponent,
 }, {
     path: 'login',
     canActivate: [canLogin],

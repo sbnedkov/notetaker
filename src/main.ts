@@ -12,8 +12,7 @@ import mongoose from 'mongoose';
 import { doubleCsrf } from 'csrf-csrf';
 
 import db from './db';
-import { loginUser, logoutUser } from './utils';
-import { checkUser } from './middleware';
+import { ACCESS_DENIED, FORBIDDEN, checkUser, errorHandler, loginUser, logoutUser } from './utils';
 
 async function init() {
     if (!process.env.cookieSecret || !process.env.sessionSecret || !process.env.csrfSecret) {
@@ -112,7 +111,10 @@ async function init() {
         res.sendStatus(200);
     });
 
+    app.use(errorHandler);
+
     const port = process.env.PORT || process.argv[2];
     app.listen(port, () => console.log(`Server listening on ${port}.`));
 }
+
 init().then(() => console.log('Initialization of server done.')).catch(console.error);

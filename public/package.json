@@ -30,6 +30,7 @@
     "@angular/compiler-cli": "^19.0.0",
     "@nx/angular": "20.3.0",
     "@nx/workspace": "20.3.0",
+    "@primeng/themes": "^19.0.5",
     "@schematics/angular": "^19.0.6",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.4.0",
@@ -39,6 +40,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "nx": "20.3.0",
+    "primeng": "^19.0.5",
+    "quill": "^2.0.3",
     "typescript": "~5.6.2"
   }
 }
