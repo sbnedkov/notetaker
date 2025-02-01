@@ -44,6 +44,11 @@ async function init() {
             'http://localhost:4200',
             'https://notetaker.sbnedkov.com',
         ],
+        allowedMethods: [
+            'POST',
+            'PUT',
+            'DELETE',
+        ],
         headers: [
             'X-Requested-With',
             'Content-Type',
@@ -70,26 +75,26 @@ async function init() {
     app.post('/login', loginUser);
     app.get('/logout', checkUser, logoutUser);
 
-    app.get('/note', checkUser, async function (req, res) {
+    app.get('/notes', checkUser, async function (req, res) {
         const notes = await Note.find({ user_id: req.session.user }).sort({ creation_date: 1 });
         res.json(notes);
     });
 
-    app.get('/note/:id', checkUser, async function (req, res) {
+    app.get('/notes/:id', checkUser, async function (req, res) {
         const note = await Note.findOne({ user_id: req.session.user, _id: req.params.id });
         res.json(note);
     });
 
-    app.post('/note', checkUser, async function (req, res) {
+    app.post('/notes', checkUser, async function (req, res) {
         const note = new Note({
             user_id: req.session.user
         });
         await note.save();
-        res.redirect(['/shownote/', note._id].join(''));
+        res.json(note._id);
     });
 
-    app.post('/note/:id', checkUser, async function (req, res) {
-        const note = await Note.findOne({ _id: req.params.id, user_id: req.session.user });
+    app.put('/notes', checkUser, async function (req, res) {
+        const note = await Note.findOne({ _id: req.body._id, user_id: req.session.user });
         if (!note) {
             throw new Error('Could not create note.');
         }
@@ -99,16 +104,16 @@ async function init() {
             tags: req.body.tags || note.tags
         });
         await note.save();
-        res.sendStatus(200);
+        res.json({ ok: true });
     });
 
-    app.delete('/note/:id', checkUser, async function (req, res) {
+    app.delete('/notes/:id', checkUser, async function (req, res) {
         const note = await Note.findOne({ _id: req.params.id, user_id: req.session.user });
         if (!note) {
             throw new Error('Could not find note.');
         }
         await note.deleteOne();
-        res.sendStatus(200);
+        res.json({ ok: true });
     });
 
     app.use(errorHandler);

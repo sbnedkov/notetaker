@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 
 import { environment } from '../environments/environment';
 
@@ -21,6 +21,28 @@ export abstract class BaseComponent implements OnInit {
         });
 
         this.loadingClass = 'loaded';
+    }
+
+    public logout () {
+        this.request<{ ok: boolean }>('get', 'logout')
+            .subscribe((result: { ok: boolean }) => {
+                if (result.ok) {
+                    this.router.navigate(['login'])
+                }
+            });
+    }
+
+    public request<C>(method: string, url: string, body: any = {}): Observable<C> {
+        return this.token$.pipe(
+            switchMap(token => this.http.request<C>(method, `${environment.apiUrl}/${url}`, {
+                    body,
+                    withCredentials: true,
+                    headers: {
+                        'X-Csrf-Token': token
+                    },
+                }),
+            ),
+        );
     }
 }
 

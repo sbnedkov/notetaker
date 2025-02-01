@@ -21,46 +21,43 @@ export class NotesComponent extends BaseComponent implements OnInit {
 
     public override ngOnInit () {
         super.ngOnInit();
+        this.reloadNotes();
+    }
 
-        this.notes$ = this.token$.pipe(
-            switchMap(token => this.http.get<INote[]>(`${environment.apiUrl}/note`, {
-                withCredentials: true,
-                headers: {
-                    'X-Csrf-Token': token
-                },
-             })),
-             map(response => {
-                 if (response) {
-                     return response;
-                 } else {
-                     return []
-                 }
-             }),
-             catchError((err) => {
-                 console.error(err)
-                 return []
-             }),
-        );
+    public createNote () {
+        this.request<string>('post', 'notes')
+            .subscribe((_id: string) => {
+                this.router.navigate(['note'], { state: { _id }, queryParams: { logged: true } });
+            });
     }
 
     public openNote (_id: string) {
-        this.router.navigate(['note'], { state: { _id }, queryParams: { logged: true } })
+        this.router.navigate(['note'], { state: { _id }, queryParams: { logged: true } });
     }
 
-    public logout () {
-        this.token$.pipe(
-            switchMap(token => this.http.get<{ ok: boolean }>(`${environment.apiUrl}/logout`, {
-                    withCredentials: true,
-                    headers: {
-                        'X-Csrf-Token': token
-                    },
+    public remove (_id: string) {
+        this.request<{ ok: boolean }>('delete', `notes/${_id}`)
+            .subscribe(result => {
+                if (result.ok) {
+                    this.reloadNotes();
+                }
+            });
+    }
+
+    private reloadNotes () {
+        this.notes$ = this.request<INote[]>('get', 'notes')
+            .pipe(
+                map(response => {
+                    if (response) {
+                        return response;
+                    } else {
+                        return []
+                    }
                 }),
-            ),
-        )
-        .subscribe((result: { ok: boolean }) => {
-            if (result.ok) {
-                this.router.navigate(['login'])
-            }
-        })
+                catchError((err) => {
+                    console.error(err)
+                    return []
+                }),
+            );
     }
 }

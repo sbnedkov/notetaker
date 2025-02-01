@@ -1,3 +1,14 @@
-<div *ngIf="note$ | async as note">
-    <p-editor [(ngModel)]="note.content" [style]="{ height: '320px' }" />
+<div [class]="loadingClass" style="display: none;" *ngIf="note$ | async as note">
+    <div id="header"><button class="logout-link" (click)="logout()">Logout</button></div>
+
+    <div>
+        <input type="text" pInputText [(ngModel)]="note.title">
+        <p-editor [(ngModel)]="note.content" [style]="{ height: '320px' }" />
+        Tags: <p-tag (click)="removeTag(note, i)" *ngFor="let tag of note.tags; let i = index" icon="pi pi-times" value="{{tag}}" />
+        <input type="text" pInputText placeholder="New space delimited tags" [(ngModel)]="newTags">
+    </div>
+    <div>
+        <p-button (click)="save(note)" label="Save" />
+        <p-button (click)="cancel()" label="Cancel" severity="secondary" />
+    </div>
 </div>

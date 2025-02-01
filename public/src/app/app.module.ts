@@ -3,7 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
 import { EditorModule } from 'primeng/editor';
+import { InputTextModule } from 'primeng/inputtext';
+import { TagModule } from 'primeng/tag';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
@@ -30,7 +33,10 @@ import { AppRoutingModule } from './app-routing.module';
         FormsModule,
         HttpClientModule,
         HttpClientXsrfModule,
+        ButtonModule,
         EditorModule,
+        InputTextModule,
+        TagModule,
     ],
     providers: [
         LoginService,
