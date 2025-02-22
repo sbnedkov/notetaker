@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
     "watch": "nx build --watch --configuration development",

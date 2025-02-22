@@ -9,7 +9,8 @@
   },
   "main": "main.js",
   "scripts": {
-    "build": "rm -fr ./dist; tsc"
+    "build": "rm -fr ./dist; tsc",
+    "gulp": "gulp"
   },
   "keywords": [
     "notes",
