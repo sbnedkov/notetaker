@@ -1,3 +1,3 @@
 export const environment = {
-    apiUrl: 'https://notetaker.sbnedkov.com'
+    apiUrl: 'https://notetaker-api.sbnedkov.com'
 };
